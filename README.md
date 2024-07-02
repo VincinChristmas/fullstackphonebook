@@ -18,4 +18,9 @@ a Node application that returns a hardcoded list of phonebook entries
    ![alt text](image-7.png)
    ![alt text](image-8.png)
 
+4. completed the fourth part
+   ![alt text](image-9.png)
+   ![alt text](image-10.png)
+
+
 
