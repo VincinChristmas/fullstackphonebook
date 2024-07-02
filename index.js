@@ -32,6 +32,10 @@ let persons = [
       }
 ]
 
+app.use(express.json())
+
+
+
 app.get('/', (request, response)=>{
     response.send('<h1>Hello World</h1>')
 })
@@ -40,6 +44,34 @@ app.get('/info', (request, response) => {
     const currentDate = new Date()
     response.send(`<h1>Phonebook has info for ${persons.length} people<h1/><h1>${currentDate}</h1>`)
 })
+
+const generateId = () => {
+  const maxId = persons.length > 0
+    ? Math.max(...notes.map(n => Number(n.id)))
+    : 0
+  return String(maxId + 1)
+}
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  if (!body.content) {
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  const person = {
+    content: body.content,
+    important: body.important || false,
+    id: generateId(),
+  }
+
+  persons = notes.concat(person)
+
+  response.json(person)
+})
+
 
 app.get('/api/persons', (request, response)=>{
     response.json(persons)
